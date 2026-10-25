@@ -7,28 +7,27 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: #ffffff; color: #292524; padding-bottom: 100px; }
+        body { background-color: #ffffff; color: #292524; padding-bottom: 70px; }
         
-        /* Шапка сайта как на скриншотах */
-        header { text-align: center; padding: 15px 16px 10px; background: #ffffff; border-bottom: 1px solid #f0efed; position: sticky; top: 0; z-index: 50; }
-        .logo-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-        .menu-icon { font-size: 20px; cursor: pointer; color: #292524; }
-        .logo-text { font-family: serif; font-size: 22px; font-weight: 700; color: #b8975a; letter-spacing: 2px; }
-        .phone-icon { font-size: 18px; color: #292524; }
+        /* Шапка сайта */
+        header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #ffffff; border-bottom: 1px solid #f0efed; position: sticky; top: 0; z-index: 50; }
+        .menu-btn { font-size: 20px; cursor: pointer; color: #292524; background: none; border: none; }
+        .logo { font-family: serif; font-size: 20px; font-weight: 700; color: #b8975a; letter-spacing: 2px; }
+        .phone-btn { font-size: 16px; color: #292524; text-decoration: none; }
 
-        /* Баннер доставки */
-        .promo-banner { background: #e8b4bc; color: #ffffff; padding: 20px; border-radius: 12px; margin: 12px; text-align: center; background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://flowerskam.ru/image/cache/catalog/Screenshot_14-500x500.png'); background-size: cover; background-position: center; }
-        .promo-banner h2 { font-size: 20px; font-family: serif; margin-bottom: 6px; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
-        .promo-banner p { font-size: 12px; margin-bottom: 12px; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
-        .promo-btn { background: #e8b4bc; color: #ffffff; border: none; padding: 8px 16px; border-radius: 6px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
+        /* Баннер */
+        .banner { background: #dca3ac; color: #ffffff; padding: 25px 16px; text-align: center; background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center; margin-bottom: 20px; }
+        .banner h2 { font-size: 22px; font-family: serif; margin-bottom: 6px; font-weight: 400; text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+        .banner p { font-size: 12px; margin-bottom: 14px; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+        .banner-btn { background: #dca3ac; color: #ffffff; border: 1px solid rgba(255,255,255,0.6); padding: 8px 18px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; letter-spacing: 1px; }
 
-        .section-title { font-size: 20px; font-weight: 400; color: #1c1917; margin: 24px 12px 12px; font-family: serif; }
+        .section-title { font-size: 20px; font-weight: 400; color: #1c1917; margin: 20px 16px 12px; font-family: serif; }
 
         /* Сетка товаров */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 12px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 12px; }
         .card { background: #ffffff; border: 1px solid #f0efed; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
         
-        .img-box { width: 100%; height: 160px; background: #f7f6f5; position: relative; }
+        .img-box { width: 100%; height: 150px; background: #f7f6f5; position: relative; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
         .badge-novinka { position: absolute; top: 8px; left: 8px; background: #ffffff; color: #0284c7; font-size: 9px; font-weight: 700; padding: 3px 6px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         
@@ -37,11 +36,11 @@
         .card-bottom { padding: 10px; display: flex; flex-direction: column; gap: 8px; }
         .price { font-size: 14px; font-weight: 700; color: #1c1917; }
         
-        /* Фирменная розовая кнопка сайта */
-        .btn-add { background: #e8b4bc; color: #ffffff; border: none; padding: 9px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; cursor: pointer; letter-spacing: 0.5px; text-align: center; }
-        .btn-add:active { transform: scale(0.98); background: #dca3ac; }
+        /* Розовая кнопка сайта */
+        .btn-add { background: #dca3ac; color: #ffffff; border: none; padding: 9px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; cursor: pointer; letter-spacing: 0.5px; text-align: center; }
+        .btn-add:active { transform: scale(0.98); background: #c58d97; }
 
-        /* Модальное окно */
+        /* Модальное окно товара */
         #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; align-items: flex-end; }
         .modal-content { background: #ffffff; width: 100%; border-radius: 20px 20px 0 0; padding: 20px; max-height: 85vh; overflow-y: auto; animation: slideUp 0.3s ease; }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
@@ -52,49 +51,52 @@
         .modal-desc { font-size: 12px; color: #78716c; line-height: 1.5; margin-bottom: 20px; }
         .close-modal { width: 100%; background: #f5f5f4; color: #1c1917; border: none; padding: 11px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; margin-top: 8px; }
 
-        /* Блок корзины */
-        .cart-box { margin: 20px 12px 0; background: #ffffff; border: 1px solid #e7e5e4; border-radius: 12px; padding: 16px; }
-        .cart-title { font-size: 15px; font-weight: 700; margin-bottom: 10px; font-family: serif; }
+        /* Корзина */
+        .cart-box { margin: 25px 12px 0; background: #ffffff; border: 1px solid #e7e5e4; border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .cart-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; font-family: serif; }
         .cart-items { font-size: 12px; color: #44403c; margin-bottom: 12px; }
         .cart-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f5f5f4; }
         
         .delivery-options { margin: 12px 0; display: flex; gap: 8px; }
         .delivery-btn { flex: 1; padding: 9px; font-size: 11px; font-weight: 600; border: 1px solid #e7e5e4; border-radius: 8px; background: #f5f5f4; color: #78716c; cursor: pointer; text-align: center; }
-        .delivery-btn.active { background: #e8b4bc; border-color: #e8b4bc; color: #ffffff; }
+        .delivery-btn.active { background: #dca3ac; border-color: #dca3ac; color: #ffffff; }
         
         #address-box { display: block; margin-bottom: 12px; }
         #address-input { width: 100%; padding: 10px; font-size: 12px; border: 1px solid #d6d3d1; border-radius: 8px; outline: none; background: #fcfbf9; }
-        #address-input:focus { border-color: #e8b4bc; }
+        #address-input:focus { border-color: #dca3ac; }
 
         .cart-total { border-top: 1px solid #e7e5e4; padding-top: 10px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 14px; font-weight: 700; }
         
         .btn-checkout { width: 100%; background: #1c1917; color: #ffffff; border: none; padding: 13px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; }
         .btn-checkout:active { transform: scale(0.98); }
+
+        /* Нижняя панель навигации как на сайте */
+        nav.bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; border-top: 1px solid #e7e5e4; display: flex; justify-content: space-around; padding: 10px 0; z-index: 90; }
+        .nav-item { text-align: center; font-size: 10px; color: #78716c; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; }
+        .nav-item span { font-size: 18px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo-container">
-            <div class="menu-icon">☰</div>
-            <div class="logo-text">SAKURA</div>
-            <div class="phone-icon">📞</div>
-        </div>
+        <button class="menu-btn" onclick="alert('Меню салона SAKURA: пр-т Карла Маркса, 5')">☰</button>
+        <div class="logo">SAKURA</div>
+        <a href="tel:+79004383524" class="phone-btn">📞</a>
     </header>
 
-    <div class="promo-banner">
+    <div class="banner">
         <h2>Доставим за 60 минут</h2>
         <p>бережно и аккуратно</p>
-        <button class="promo-btn">Заказать</button>
+        <button class="banner-btn" onclick="window.scrollTo({top: 400, behavior: 'smooth'})">Заказать</button>
     </div>
 
     <!-- Популярные букеты -->
     <div class="section-title">Популярные букеты и композиции</div>
     <div class="grid">
-        <div class="card" onclick="openModal('Букет «Шёпот страсти»', 5010, 'Изысканный премиальный букет с отборной розой сорт Нина, свежей зеленью и стильной дизайнерской упаковкой.', 'https://flowerskam.ru/image/cache/catalog/Screenshot_25-500x500.png')">
+        <div class="card" onclick="openModal('Букет «Шёпот страсти»', 5010, 'Изысканный премиальный букет с отборной розой сорт Нина, свежей зеленью и стильной дизайнерской упаковкой.', 'https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80')">
             <div class="img-box">
                 <span class="badge-novinka">⚡ Новинка</span>
-                <img src="https://flowerskam.ru/image/cache/catalog/Screenshot_25-500x500.png" alt="Шёпот страсти">
+                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80" alt="Шёпот страсти">
             </div>
             <div class="card-body">
                 <h3>Букет «Шёпот страсти» с розой сорт Нина</h3>
@@ -105,10 +107,10 @@
             </div>
         </div>
 
-        <div class="card" onclick="openModal('Букет «Розовый шарм»', 3400, 'Объёмный и нежный букет из свежей гортензии и кустовой розы.', 'https://flowerskam.ru/image/cache/catalog/Screenshot_1-500x500.png')">
+        <div class="card" onclick="openModal('Букет «Розовый шарм»', 3400, 'Объёмный и нежный букет из свежей гортензии и кустовой розы.', 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80')">
             <div class="img-box">
                 <span class="badge-novinka">⚡ Новинка</span>
-                <img src="https://flowerskam.ru/image/cache/catalog/Screenshot_1-500x500.png" alt="Розовый шарм">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" alt="Розовый шарм">
             </div>
             <div class="card-body">
                 <h3>Букет «Розовый шарм» из гортензии и кустовой розы</h3>
@@ -119,10 +121,10 @@
             </div>
         </div>
 
-        <div class="card" onclick="openModal('Букет «Облачный блюз»', 3700, 'Утонченная композиция из небесно-голубой гортензии и белоснежной хризантемы.', 'https://flowerskam.ru/image/cache/catalog/Screenshot_2-500x500.png')">
+        <div class="card" onclick="openModal('Букет «Облачный блюз»', 3700, 'Утонченная композиция из небесно-голубой гортензии и белоснежной хризантемы.', 'https://images.unsplash.com/photo-1508610048659-a06b669e3375?auto=format&fit=crop&w=600&q=80')">
             <div class="img-box">
                 <span class="badge-novinka">⚡ Новинка</span>
-                <img src="https://flowerskam.ru/image/cache/catalog/Screenshot_2-500x500.png" alt="Облачный блюз">
+                <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3375?auto=format&fit=crop&w=600&q=80" alt="Облачный блюз">
             </div>
             <div class="card-body">
                 <h3>Букет «Облачный блюз» из голубой гортензии</h3>
@@ -133,10 +135,10 @@
             </div>
         </div>
 
-        <div class="card" onclick="openModal('Композиция «Цветочный сейф»', 3415, 'Элегантная композиция с розой и лизиантусом в уникальной коробке.', 'https://flowerskam.ru/image/cache/catalog/Screenshot_18-500x500.png')">
+        <div class="card" onclick="openModal('Композиция «Цветочный сейф»', 3415, 'Элегантная композиция с розой и лизиантусом в уникальной фирменной коробке.', 'https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80')">
             <div class="img-box">
                 <span class="badge-novinka">⚡ Новинка</span>
-                <img src="https://flowerskam.ru/image/cache/catalog/Screenshot_18-500x500.png" alt="Цветочный сейф">
+                <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Цветочный сейф">
             </div>
             <div class="card-body">
                 <h3>Композиция «Цветочный сейф» с розой</h3>
@@ -151,9 +153,9 @@
     <!-- Розы -->
     <div class="section-title">Розы</div>
     <div class="grid">
-        <div class="card" onclick="openModal('15 красных роз (50 см)', 5700, 'Классический премиальный букет из 15 длинных отборных красных роз сорта Эксплорер.', 'https://flowerskam.ru/image/cache/catalog/Screenshot_14-500x500.png')">
+        <div class="card" onclick="openModal('15 красных роз (50 см)', 5700, 'Классический премиальный букет из 15 длинных отборных красных роз сорта Эксплорер.', 'https://images.unsplash.com/photo-1559563458-527698bf5295?auto=format&fit=crop&w=600&q=80')">
             <div class="img-box">
-                <img src="https://flowerskam.ru/image/cache/catalog/Screenshot_14-500x500.png" alt="15 роз">
+                <img src="https://images.unsplash.com/photo-1559563458-527698bf5295?auto=format&fit=crop&w=600&q=80" alt="15 роз">
             </div>
             <div class="card-body">
                 <h3>15 красных роз 50 см под ленту</h3>
@@ -164,9 +166,9 @@
             </div>
         </div>
 
-        <div class="card" onclick="openModal('Букет из 15 пионовидных роз', 9600, 'Роскошный объемный букет из 15 пионовидных роз с добавлением ароматного эвкалипта.', 'https://flowerskam.ru/image/cache/catalog/Screenshot_9-500x500.png')">
+        <div class="card" onclick="openModal('Букет из 15 пионовидных роз', 9600, 'Роскошный объемный букет из 15 пионовидных роз с добавлением ароматного эвкалипта.', 'https://images.unsplash.com/photo-1533619043862-24af3c3bb3f7?auto=format&fit=crop&w=600&q=80')">
             <div class="img-box">
-                <img src="https://flowerskam.ru/image/cache/catalog/Screenshot_9-500x500.png" alt="Пионовидные розы">
+                <img src="https://images.unsplash.com/photo-1533619043862-24af3c3bb3f7?auto=format&fit=crop&w=600&q=80" alt="Пионовидные розы">
             </div>
             <div class="card-body">
                 <h3>Букет из 15 шт пионовидных кустовых роз</h3>
@@ -178,7 +180,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно -->
+    <!-- Модальное окно с подробным описанием -->
     <div id="modal" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <div class="modal-img">
@@ -213,6 +215,22 @@
         </div>
         <button class="btn-checkout" onclick="submitOrder()">Оформить заказ</button>
     </div>
+
+    <!-- Нижняя панель навигации -->
+    <nav class="bottom-nav">
+        <a class="nav-item" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <span>☷</span>Каталог
+        </a>
+        <a class="nav-item" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})">
+            <span>🛒</span>Корзина
+        </a>
+        <a class="nav-item" onclick="alert('Салон SAKURA: Петропавловск-Камчатский, пр-т Карла Маркса, 5')">
+            <span>📍</span>Адрес
+        </a>
+        <a class="nav-item" onclick="window.location.href='tel:+79004383524'">
+            <span>📞</span>Связь
+        </a>
+    </nav>
 
     <script>
         let tg = window.Telegram?.WebApp;
