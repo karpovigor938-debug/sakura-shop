@@ -18,10 +18,10 @@
         .section-title::before { content: ""; display: inline-block; width: 3px; height: 14px; background: #78112d; border-radius: 2px; }
 
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .card { background: #ffffff; border: 1px solid #ebe9e6; border-radius: 16px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+        .card { background: #ffffff; border: 1px solid #ebe9e6; border-radius: 16px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 6px rgba(0,0,0,0.02); cursor: pointer; transition: transform 0.1s ease; }
+        .card:active { transform: scale(0.98); }
         
-        .img-box { width: 100%; height: 120px; border-radius: 12px; overflow: hidden; margin-bottom: 8px; background: #f3f1ee; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .img-box { width: 100%; height: 120px; border-radius: 12px; overflow: hidden; margin-bottom: 8px; background: #fdf2f2; display: flex; align-items: center; justify-content: center; font-size: 40px; }
 
         .card h3 { font-size: 12px; color: #292524; font-weight: 600; line-height: 1.3; }
         .card p { font-size: 10px; color: #78716c; margin-top: 3px; }
@@ -30,6 +30,16 @@
         
         .btn-add { background: #78112d; color: #ffffff; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; }
         .btn-add:active { transform: scale(0.95); background: #9f1239; }
+
+        /* Модальное окно подробного описания */
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; align-items: flex-end; }
+        .modal-content { background: #ffffff; width: 100%; border-radius: 24px 24px 0 0; padding: 20px; max-height: 80vh; overflow-y: auto; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .modal-img { width: 100%; height: 200px; background: #fdf2f2; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 60px; margin-bottom: 14px; }
+        .modal-title { font-size: 18px; font-weight: 700; color: #78112d; font-family: serif; margin-bottom: 6px; }
+        .modal-price { font-size: 16px; font-weight: 700; color: #292524; margin-bottom: 12px; }
+        .modal-desc { font-size: 12px; color: #57534e; line-height: 1.5; margin-bottom: 20px; }
+        .close-modal { width: 100%; background: #f7f6f5; color: #292524; border: none; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 8px; }
 
         .cart-box { margin-top: 24px; background: #ffffff; border: 1px solid #ebe9e6; border-radius: 16px; padding: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
         .cart-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; font-family: serif; color: #78112d; }
@@ -62,51 +72,51 @@
     <!-- Сборные букеты -->
     <div class="section-title">Сборные букеты и миксы</div>
     <div class="grid">
-        <div class="card">
+        <div class="card" onclick="openModal('Букет «Шёпот страсти»', 5010, 'Изысканный премиальный букет с отборной розой сорт Нина, свежей зеленью и стильной дизайнерской упаковкой.', '🌸')">
             <div>
-                <div class="img-box"><img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=500&q=80" alt="Шёпот страсти"></div>
+                <div class="img-box">🌸</div>
                 <h3>Букет «Шёпот страсти»</h3>
                 <p>С розой сорт Нина</p>
             </div>
             <div class="card-bottom">
                 <span class="price">5 010 ₽</span>
-                <button class="btn-add" onclick="addItem('Букет «Шёпот страсти»', 5010)">В корзину</button>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет «Шёпот страсти»', 5010)">В корзину</button>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openModal('Букет «Легкая песня»', 7180, 'Яркий и воздушный микс, включающий ароматные гвоздики, хризантемы и нежные кустовые розы.', '💐')">
             <div>
-                <div class="img-box"><img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=500&q=80" alt="Легкая песня"></div>
+                <div class="img-box">💐</div>
                 <h3>Букет «Легкая песня»</h3>
                 <p>Гвоздики, хризантема, роза</p>
             </div>
             <div class="card-bottom">
                 <span class="price">7 180 ₽</span>
-                <button class="btn-add" onclick="addItem('Букет «Легкая песня»', 7180)">В корзину</button>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет «Легкая песня»', 7180)">В корзину</button>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openModal('Букет «Розовый шарм»', 3400, 'Объёмный и нежный букет из свежей голубой гортензии и пышной кустовой розы.', '🪻')">
             <div>
-                <div class="img-box"><img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80" alt="Розовый шарм"></div>
+                <div class="img-box">🪻</div>
                 <h3>Букет «Розовый шарм»</h3>
                 <p>Гортензия и кустовая роза</p>
             </div>
             <div class="card-bottom">
                 <span class="price">3 400 ₽</span>
-                <button class="btn-add" onclick="addItem('Букет «Розовый шарм»', 3400)">В корзину</button>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет «Розовый шарм»', 3400)">В корзину</button>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openModal('Букет «Облачный блюз»', 3700, 'Утонченная композиция из небесно-голубой гортензии и белоснежной пушистой хризантемы.', '💙')">
             <div>
-                <div class="img-box"><img src="https://images.unsplash.com/photo-1508610048659-a06b669e3375?auto=format&fit=crop&w=500&q=80" alt="Облачный блюз"></div>
+                <div class="img-box">💙</div>
                 <h3>Букет «Облачный блюз»</h3>
                 <p>Голубая гортензия, хризантема</p>
             </div>
             <div class="card-bottom">
                 <span class="price">3 700 ₽</span>
-                <button class="btn-add" onclick="addItem('Букет «Облачный блюз»', 3700)">В корзину</button>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет «Облачный блюз»', 3700)">В корзину</button>
             </div>
         </div>
     </div>
@@ -114,80 +124,64 @@
     <!-- Розы и монобукеты -->
     <div class="section-title">Розы и монобукеты</div>
     <div class="grid">
-        <div class="card">
+        <div class="card" onclick="openModal('15 красных роз (50 см)', 5700, 'Классический премиальный букет из 15 длинных отборных красных роз сорта Эксплорер под ленту.', '🌹')">
             <div>
-                <div class="img-box"><img src="https://images.unsplash.com/photo-1559563458-527698bf5295?auto=format&fit=crop&w=500&q=80" alt="15 роз"></div>
+                <div class="img-box">🌹</div>
                 <h3>15 красных роз (50 см)</h3>
                 <p>Элитные свежие розы Эксплорер</p>
             </div>
             <div class="card-bottom">
                 <span class="price">5 700 ₽</span>
-                <button class="btn-add" onclick="addItem('15 красных роз 50 см', 5700)">В корзину</button>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('15 красных роз 50 см', 5700)">В корзину</button>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openModal('Букет «Ароматы лета»', 3800, 'Солнечная и жизнерадостная авторская сборка из сезонных цветов премиального качества.', '✨')">
             <div>
-                <div class="img-box"><img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=500&q=80" alt="Ароматы лета"></div>
+                <div class="img-box">✨</div>
                 <h3>Букет «Ароматы лета»</h3>
                 <p>Яркая авторская сборка</p>
             </div>
             <div class="card-bottom">
                 <span class="price">3 800 ₽</span>
-                <button class="btn-add" onclick="addItem('Букет «Ароматы лета»', 3800)">В корзину</button>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет «Ароматы лета»', 3800)">В корзину</button>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openModal('Букет из 15 пионовидных роз', 9600, 'Роскошный объемный букет из 15 пионовидных роз с добавлением ароматного эвкалипта.', '🌷')">
             <div>
-                <div class="img-box"><img src="https://images.unsplash.com/photo-1533619043862-24af3c3bb3f7?auto=format&fit=crop&w=500&q=80" alt="Пионовидные розы"></div>
+                <div class="img-box">🌷</div>
                 <h3>Букет из 15 пионовидных роз</h3>
                 <p>С эвкалиптом в упаковке</p>
             </div>
             <div class="card-bottom">
                 <span class="price">9 600 ₽</span>
-                <button class="btn-add" onclick="addItem('Букет из 15 пионовидных роз', 9600)">В корзину</button>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет из 15 пионовидных роз', 9600)">В корзину</button>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openModal('25 белых роз (Мондиаль)', 9550, 'Величественный и чистый букет из 25 белых роз сорта Мондиаль высотой 50 см.', '🤍')">
             <div>
-                <div class="img-box"><img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=500&q=80" alt="Белые розы"></div>
+                <div class="img-box">🤍</div>
                 <h3>25 белых роз (Мондиаль)</h3>
                 <p>Высота 50 см под ленту</p>
             </div>
             <div class="card-bottom">
                 <span class="price">9 550 ₽</span>
-                <button class="btn-add" onclick="addItem('25 белых роз Мондиаль', 9550)">В корзину</button>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('25 белых роз Мондиаль', 9550)">В корзину</button>
             </div>
         </div>
     </div>
 
-    <!-- Композиции в коробках -->
-    <div class="section-title">Композиции в коробках</div>
-    <div class="grid">
-        <div class="card">
-            <div>
-                <div class="img-box"><img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=500&q=80" alt="Красная симфония"></div>
-                <h3>Композиция «Красная симфония»</h3>
-                <p>Из премиальных роз в коробке</p>
-            </div>
-            <div class="card-bottom">
-                <span class="price">8 510 ₽</span>
-                <button class="btn-add" onclick="addItem('Композиция «Красная симфония»', 8510)">В корзину</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div>
-                <div class="img-box"><img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=500&q=80" alt="Цветочный сейф"></div>
-                <h3>Композиция «Цветочный сейф»</h3>
-                <p>С розой и лизиантусом</p>
-            </div>
-            <div class="card-bottom">
-                <span class="price">3 415 ₽</span>
-                <button class="btn-add" onclick="addItem('Композиция «Цветочный сейф»', 3415)">В корзину</button>
-            </div>
+    <!-- Модальное окно подробностей -->
+    <div id="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div id="modal-img" class="modal-img">🌸</div>
+            <div id="modal-title" class="modal-title">Название букета</div>
+            <div id="modal-price" class="modal-price">0 ₽</div>
+            <div id="modal-desc" class="modal-desc">Описание букета...</div>
+            <button class="btn-checkout" id="modal-add-btn" onclick="">Добавить в корзину</button>
+            <button class="close-modal" onclick="closeModal()">Закрыть</button>
         </div>
     </div>
 
@@ -221,6 +215,22 @@
 
         let cart = [];
         let deliveryType = 'delivery';
+
+        function openModal(name, price, desc, emoji) {
+            document.getElementById('modal-title').innerText = name;
+            document.getElementById('modal-price').innerText = price + ' ₽';
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-img').innerText = emoji;
+            document.getElementById('modal-add-btn').onclick = function() {
+                addItem(name, price);
+                closeModal();
+            };
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
 
         function setDeliveryType(type) {
             deliveryType = type;
