@@ -7,184 +7,50 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: #fafaf9; color: #1c1917; padding: 12px; padding-bottom: 80px; }
+        body { background-color: #fcfbf9; color: #1c1917; padding: 12px; padding-bottom: 100px; opacity: 0; animation: fadeIn 0.5s ease-in-out forwards; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         header { text-align: center; margin: 15px 0 20px; }
-        h1 { font-size: 22px; color: #881337; font-weight: 700; letter-spacing: 1px; }
-        p.sub { font-size: 11px; color: #78716c; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-        .badge { display: inline-block; background: #fff1f2; color: #9f1239; font-size: 11px; padding: 4px 10px; border-radius: 20px; margin-top: 8px; font-weight: 500; }
+        h1 { font-size: 24px; color: #881337; font-weight: 700; letter-spacing: 1.5px; font-family: serif; }
+        p.sub { font-size: 11px; color: #78716c; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
+        .badge { display: inline-block; background: #fff1f2; color: #9f1239; font-size: 11px; padding: 5px 12px; border-radius: 20px; margin-top: 10px; font-weight: 500; box-shadow: 0 2px 5px rgba(159, 18, 57, 0.05); }
+        
+        .section-title { font-size: 15px; font-weight: 700; color: #1c1917; margin: 22px 0 10px; font-family: serif; border-left: 3px solid #881337; padding-left: 8px; }
+        
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .card { background: #ffffff; border: 1px solid #f5f5f4; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; }
-        .emoji-box { width: 100%; height: 110px; background: #fff1f2; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 8px; }
+        .card { background: #ffffff; border: 1px solid #f0efed; border-radius: 18px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .card:active { transform: scale(0.98); }
+        
+        .emoji-box { width: 100%; height: 110px; background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 10px; transition: transform 0.3s ease; }
+        .card:hover .emoji-box { transform: scale(1.03); }
+        
         .card h3 { font-size: 12px; color: #1c1917; font-weight: 600; line-height: 1.3; }
-        .card p { font-size: 10px; color: #78716c; margin-top: 2px; }
-        .card-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
-        .price { font-size: 12px; font-weight: 700; color: #881337; }
-        .btn-add { background: #9f1239; color: #ffffff; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 500; cursor: pointer; }
-        .btn-add:active { transform: scale(0.95); }
-        .cart-box { margin-top: 20px; background: #ffffff; border: 1px solid #f5f5f4; border-radius: 16px; padding: 14px; }
-        .cart-title { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
-        .cart-items { font-size: 11px; color: #44403c; margin-bottom: 12px; min-height: 20px; }
-        .cart-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #fafaf9; }
-        .cart-total { border-top: 1px solid #f5f5f4; padding-top: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 13px; font-weight: 700; }
-        .cart-total span:last-child { color: #881337; font-size: 15px; }
-        .btn-checkout { width: 100%; background: #1c1917; color: #ffffff; border: none; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
-        .btn-checkout:active { transform: scale(0.98); }
-    </style>
-</head>
-<body>
+        .card p { font-size: 10px; color: #78716c; margin-top: 3px; }
+        
+        .card-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
+        .price { font-size: 13px; font-weight: 700; color: #881337; }
+        
+        .btn-add { background: #881337; color: #ffffff; border: none; padding: 7px 12px; border-radius: 10px; font-size: 11px; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+        .btn-add:active { transform: scale(0.92); background: #9f1239; }
 
-    <header>
-        <h1>SAKURA</h1>
-        <p class="sub">Цветочный салон • Петропавловск-Камчатский</p>
-        <div class="badge">🚚 Доставка за 60 минут</div>
-    </header>
+        .cart-box { margin-top: 25px; background: #ffffff; border: 1px solid #f0efed; border-radius: 20px; padding: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .cart-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; font-family: serif; }
+        .cart-items { font-size: 11px; color: #44403c; margin-bottom: 14px; min-height: 24px; }
+        .cart-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #fafaf9; animation: fadeIn 0.3s ease; }
+        
+        .delivery-options { margin: 14px 0; display: flex; gap: 8px; }
+        .delivery-btn { flex: 1; padding: 10px; font-size: 11px; font-weight: 600; border: 1px solid #e7e5e4; border-radius: 10px; background: #f5f5f4; color: #78716c; cursor: pointer; text-align: center; transition: all 0.2s ease; }
+        .delivery-btn.active { background: #fff1f2; border-color: #881337; color: #881337; box-shadow: 0 2px 6px rgba(136, 19, 55, 0.08); }
+        
+        #address-box { display: none; margin-bottom: 14px; animation: fadeIn 0.3s ease; }
+        #address-input { width: 100%; padding: 11px 12px; font-size: 12px; border: 1px solid #d6d3d1; border-radius: 10px; outline: none; background: #fafaf9; transition: border-color 0.2s; }
+        #address-input:focus { border-color: #881337; background: #ffffff; }
 
-    <div class="grid">
-        <!-- 1 -->
-        <div class="card">
-            <div>
-                <div class="emoji-box">🌸</div>
-                <h3>Букет «Шёпот страсти»</h3>
-                <p>С розой сорт Нина</p>
-            </div>
-            <div class="card-bottom">
-                <span class="price">5 010 ₽</span>
-                <button class="btn-add" onclick="addItem('Букет «Шёпот страсти»', 5010)">В корзину</button>
-            </div>
-        </div>
-
-        <!-- 2 -->
-        <div class="card">
-            <div>
-                <div class="emoji-box">💐</div>
-                <h3>Букет «Легкая песня»</h3>
-                <p>Гвоздики, хризантема, роза</p>
-            </div>
-            <div class="card-bottom">
-                <span class="price">7 180 ₽</span>
-                <button class="btn-add" onclick="addItem('Букет «Легкая песня»', 7180)">В корзину</button>
-            </div>
-        </div>
-
-        <!-- 3 -->
-        <div class="card">
-            <div>
-                <div class="emoji-box">🪻</div>
-                <h3>Букет «Розовый шарм»</h3>
-                <p>Гортензия и кустовая роза</p>
-            </div>
-            <div class="card-bottom">
-                <span class="price">3 400 ₽</span>
-                <button class="btn-add" onclick="addItem('Букет «Розовый шарм»', 3400)">В корзину</button>
-            </div>
-        </div>
-
-        <!-- 4 -->
-        <div class="card">
-            <div>
-                <div class="emoji-box">💙</div>
-                <h3>Букет «Облачный блюз»</h3>
-                <p>Голубая гортензия, хризантема</p>
-            </div>
-            <div class="card-bottom">
-                <span class="price">3 700 ₽</span>
-                <button class="btn-add" onclick="addItem('Букет «Облачный блюз»', 3700)">В корзину</button>
-            </div>
-        </div>
-
-        <!-- 5 -->
-        <div class="card">
-            <div>
-                <div class="emoji-box">🌹</div>
-                <h3>15 красных роз (50 см)</h3>
-                <p>Элитные свежие розы</p>
-            </div>
-            <div class="card-bottom">
-                <span class="price">5 700 ₽</span>
-                <button class="btn-add" onclick="addItem('15 красных роз 50 см', 5700)">В корзину</button>
-            </div>
-        </div>
-
-        <!-- 6 -->
-        <div class="card">
-            <div>
-                <div class="emoji-box">✨</div>
-                <h3>Букет «Ароматы лета»</h3>
-                <p>Яркая авторская сборка</p>
-            </div>
-            <div class="card-bottom">
-                <span class="price">3 800 ₽</span>
-                <button class="btn-add" onclick="addItem('Букет «Ароматы лета»', 3800)">В корзину</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="cart-box">
-        <div class="cart-title">Ваш заказ</div>
-        <div id="cart-container" class="cart-items">Корзина пуста</div>
-        <div class="cart-total">
-            <span>Итого:</span>
-            <span id="total-sum">0 ₽</span>
-        </div>
-        <button class="btn-checkout" onclick="submitOrder()">Оформить заказ</button>
-    </div>
-
-    <script>
-        let tg = window.Telegram?.WebApp;
-        if (tg) {
-            tg.expand();
-        }
-
-        let cart = [];
-
-        function addItem(name, price) {
-            cart.push({ name, price });
-            renderCart();
-            if (tg && tg.HapticFeedback) {
-                tg.HapticFeedback.impactOccurred('medium');
-            }
-        }
-
-        function renderCart() {
-            let container = document.getElementById('cart-container');
-            let totalEl = document.getElementById('total-sum');
-
-            if (cart.length === 0) {
-                container.innerHTML = 'Корзина пуста';
-                totalEl.innerText = '0 ₽';
-                return;
-            }
-
-            container.innerHTML = cart.map(i => `
-                <div class="cart-row">
-                    <span>${i.name}</span>
-                    <b>${i.price} ₽</b>
-                </div>
-            `).join('');
-
-            let total = cart.reduce((sum, i) => sum + i.price, 0);
-            totalEl.innerText = total + ' ₽';
-        }
-
-        function submitOrder() {
-            if (cart.length === 0) {
-                alert('Корзина пуста');
-                return;
-            }
-
-            let text = "📦 Новый заказ из приложения SAKURA:\n" + 
-                       cart.map(i => `• ${i.name} — ${i.price} ₽`).join('\n') + 
-                       `\n\n💰 Итого: ${cart.reduce((sum, i) => sum + i.price, 0) } ₽`;
-
-            // Заказ уходит в ваш аккаунт @if_im_young с готовым текстом
-            let url = `https://t.me/if_im_young?text=${encodeURIComponent(text)}`;
-
-            if (tg && tg.openTelegramLink) {
-                tg.openTelegramLink(url);
-            } else {
-                window.open(url, '_blank');
-            }
-        }
-    </script>
-</body>
-</html>
+        .cart-total { border-top: 1px solid #f0efed; padding-top: 10px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 14px; font-weight: 700; }
+        .cart-total span:last-child { color: #881337; font-size: 16px; }
+        
+        .btn-checkout { width: 10
