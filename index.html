@@ -7,43 +7,48 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: #fafaf9; color: #1c1917; padding: 12px; padding-bottom: 90px; }
-        header { text-align: center; margin: 15px 0 20px; }
-        h1 { font-size: 24px; color: #881337; font-weight: 700; letter-spacing: 1px; font-family: serif; }
+        body { background-color: #f7f6f5; color: #292524; padding: 12px; padding-bottom: 110px; }
+        
+        header { text-align: center; margin: 12px 0 16px; background: #ffffff; padding: 16px; border-radius: 16px; border: 1px solid #ebe9e6; }
+        h1 { font-size: 24px; color: #78112d; font-weight: 700; letter-spacing: 1.5px; font-family: serif; }
         p.sub { font-size: 11px; color: #78716c; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-        .badge { display: inline-block; background: #fff1f2; color: #9f1239; font-size: 11px; padding: 4px 12px; border-radius: 20px; margin-top: 8px; font-weight: 500; }
+        .badge { display: inline-block; background: #fdf2f2; color: #9f1239; font-size: 11px; padding: 5px 12px; border-radius: 20px; margin-top: 10px; font-weight: 500; }
         
-        .section-title { font-size: 15px; font-weight: 700; color: #1c1917; margin: 22px 0 10px; font-family: serif; border-left: 3px solid #881337; padding-left: 8px; }
+        .section-title { font-size: 15px; font-weight: 700; color: #292524; margin: 20px 0 10px; font-family: serif; display: flex; align-items: center; gap: 6px; }
+        .section-title::before { content: ""; display: inline-block; width: 3px; height: 14px; background: #78112d; border-radius: 2px; }
+
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .card { background: #ffffff; border: 1px solid #f0efed; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; }
+        .card { background: #ffffff; border: 1px solid #ebe9e6; border-radius: 16px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
         
-        .img-box { width: 100%; height: 110px; border-radius: 12px; overflow: hidden; margin-bottom: 8px; background: #f5f5f4; }
+        .img-box { width: 100%; height: 120px; border-radius: 12px; overflow: hidden; margin-bottom: 8px; background: #f3f1ee; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        .card h3 { font-size: 12px; color: #1c1917; font-weight: 600; line-height: 1.3; }
-        .card p { font-size: 10px; color: #78716c; margin-top: 2px; }
+        .card h3 { font-size: 12px; color: #292524; font-weight: 600; line-height: 1.3; }
+        .card p { font-size: 10px; color: #78716c; margin-top: 3px; }
         .card-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
-        .price { font-size: 12px; font-weight: 700; color: #881337; }
-        .btn-add { background: #881337; color: #ffffff; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; }
-        .btn-add:active { transform: scale(0.95); }
+        .price { font-size: 12px; font-weight: 700; color: #78112d; }
+        
+        .btn-add { background: #78112d; color: #ffffff; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; }
+        .btn-add:active { transform: scale(0.95); background: #9f1239; }
 
-        .cart-box { margin-top: 25px; background: #ffffff; border: 1px solid #f0efed; border-radius: 16px; padding: 14px; }
-        .cart-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; font-family: serif; }
+        .cart-box { margin-top: 24px; background: #ffffff; border: 1px solid #ebe9e6; border-radius: 16px; padding: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .cart-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; font-family: serif; color: #78112d; }
         .cart-items { font-size: 11px; color: #44403c; margin-bottom: 12px; min-height: 20px; }
-        .cart-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #fafaf9; }
+        .cart-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #f7f6f5; }
         
         .delivery-options { margin: 10px 0; display: flex; gap: 8px; }
-        .delivery-btn { flex: 1; padding: 8px; font-size: 11px; font-weight: 600; border: 1px solid #e7e5e4; border-radius: 8px; background: #f5f5f4; color: #78716c; cursor: pointer; text-align: center; }
-        .delivery-btn.active { background: #fff1f2; border-color: #881337; color: #881337; }
+        .delivery-btn { flex: 1; padding: 8px; font-size: 11px; font-weight: 600; border: 1px solid #e7e5e4; border-radius: 8px; background: #f7f6f5; color: #78716c; cursor: pointer; text-align: center; }
+        .delivery-btn.active { background: #fdf2f2; border-color: #78112d; color: #78112d; }
         
         #address-box { display: block; margin-bottom: 10px; }
-        #address-input { width: 100%; padding: 10px; font-size: 12px; border: 1px solid #d6d3d1; border-radius: 8px; outline: none; background: #fafaf9; }
-        #address-input:focus { border-color: #881337; background: #ffffff; }
+        #address-input { width: 100%; padding: 10px; font-size: 12px; border: 1px solid #d6d3d1; border-radius: 8px; outline: none; background: #f7f6f5; }
+        #address-input:focus { border-color: #78112d; background: #ffffff; }
 
-        .cart-total { border-top: 1px solid #f0efed; padding-top: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 13px; font-weight: 700; }
-        .cart-total span:last-child { color: #881337; font-size: 15px; }
-        .btn-checkout { width: 100%; background: #1c1917; color: #ffffff; border: none; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
-        .btn-checkout:active { transform: scale(0.98); }
+        .cart-total { border-top: 1px solid #ebe9e6; padding-top: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 13px; font-weight: 700; }
+        .cart-total span:last-child { color: #78112d; font-size: 16px; }
+        
+        .btn-checkout { width: 100%; background: #292524; color: #ffffff; border: none; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .btn-checkout:active { transform: scale(0.98); background: #44403c; }
     </style>
 </head>
 <body>
@@ -59,7 +64,7 @@
     <div class="grid">
         <div class="card">
             <div>
-                <div class="img-box"><img src="https://flowerskam.ru/image/cache/catalog/Screenshot_25-500x500.png" alt="Шёпот страсти"></div>
+                <div class="img-box"><img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=500&q=80" alt="Шёпот страсти"></div>
                 <h3>Букет «Шёпот страсти»</h3>
                 <p>С розой сорт Нина</p>
             </div>
@@ -71,7 +76,7 @@
 
         <div class="card">
             <div>
-                <div class="img-box"><img src="https://flowerskam.ru/image/cache/catalog/Screenshot_7-500x500.png" alt="Легкая песня"></div>
+                <div class="img-box"><img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=500&q=80" alt="Легкая песня"></div>
                 <h3>Букет «Легкая песня»</h3>
                 <p>Гвоздики, хризантема, роза</p>
             </div>
@@ -83,7 +88,7 @@
 
         <div class="card">
             <div>
-                <div class="img-box"><img src="https://flowerskam.ru/image/cache/catalog/Screenshot_1-500x500.png" alt="Розовый шарм"></div>
+                <div class="img-box"><img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80" alt="Розовый шарм"></div>
                 <h3>Букет «Розовый шарм»</h3>
                 <p>Гортензия и кустовая роза</p>
             </div>
@@ -95,7 +100,7 @@
 
         <div class="card">
             <div>
-                <div class="img-box"><img src="https://flowerskam.ru/image/cache/catalog/Screenshot_2-500x500.png" alt="Облачный блюз"></div>
+                <div class="img-box"><img src="https://images.unsplash.com/photo-1508610048659-a06b669e3375?auto=format&fit=crop&w=500&q=80" alt="Облачный блюз"></div>
                 <h3>Букет «Облачный блюз»</h3>
                 <p>Голубая гортензия, хризантема</p>
             </div>
@@ -111,7 +116,191 @@
     <div class="grid">
         <div class="card">
             <div>
-                <div class="img-box"><img src="https://flowerskam.ru/image/cache/catalog/Screenshot_14-500x500.png" alt="15 роз"></div>
+                <div class="img-box"><img src="https://images.unsplash.com/photo-1559563458-527698bf5295?auto=format&fit=crop&w=500&q=80" alt="15 роз"></div>
                 <h3>15 красных роз (50 см)</h3>
                 <p>Элитные свежие розы Эксплорер</p>
             </div>
+            <div class="card-bottom">
+                <span class="price">5 700 ₽</span>
+                <button class="btn-add" onclick="addItem('15 красных роз 50 см', 5700)">В корзину</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <div class="img-box"><img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=500&q=80" alt="Ароматы лета"></div>
+                <h3>Букет «Ароматы лета»</h3>
+                <p>Яркая авторская сборка</p>
+            </div>
+            <div class="card-bottom">
+                <span class="price">3 800 ₽</span>
+                <button class="btn-add" onclick="addItem('Букет «Ароматы лета»', 3800)">В корзину</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <div class="img-box"><img src="https://images.unsplash.com/photo-1533619043862-24af3c3bb3f7?auto=format&fit=crop&w=500&q=80" alt="Пионовидные розы"></div>
+                <h3>Букет из 15 пионовидных роз</h3>
+                <p>С эвкалиптом в упаковке</p>
+            </div>
+            <div class="card-bottom">
+                <span class="price">9 600 ₽</span>
+                <button class="btn-add" onclick="addItem('Букет из 15 пионовидных роз', 9600)">В корзину</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <div class="img-box"><img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=500&q=80" alt="Белые розы"></div>
+                <h3>25 белых роз (Мондиаль)</h3>
+                <p>Высота 50 см под ленту</p>
+            </div>
+            <div class="card-bottom">
+                <span class="price">9 550 ₽</span>
+                <button class="btn-add" onclick="addItem('25 белых роз Мондиаль', 9550)">В корзину</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Композиции в коробках -->
+    <div class="section-title">Композиции в коробках</div>
+    <div class="grid">
+        <div class="card">
+            <div>
+                <div class="img-box"><img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=500&q=80" alt="Красная симфония"></div>
+                <h3>Композиция «Красная симфония»</h3>
+                <p>Из премиальных роз в коробке</p>
+            </div>
+            <div class="card-bottom">
+                <span class="price">8 510 ₽</span>
+                <button class="btn-add" onclick="addItem('Композиция «Красная симфония»', 8510)">В корзину</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <div class="img-box"><img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=500&q=80" alt="Цветочный сейф"></div>
+                <h3>Композиция «Цветочный сейф»</h3>
+                <p>С розой и лизиантусом</p>
+            </div>
+            <div class="card-bottom">
+                <span class="price">3 415 ₽</span>
+                <button class="btn-add" onclick="addItem('Композиция «Цветочный сейф»', 3415)">В корзину</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Корзина и оформление -->
+    <div class="cart-box">
+        <div class="cart-title">Ваш заказ</div>
+        <div id="cart-container" class="cart-items">Корзина пуста</div>
+
+        <div style="font-size: 11px; font-weight: 600; margin-bottom: 6px; color: #44403c;">Способ получения:</div>
+        <div class="delivery-options">
+            <button type="button" id="btn-delivery" class="delivery-btn active" onclick="setDeliveryType('delivery')">Доставка 🚚</button>
+            <button type="button" id="btn-pickup" class="delivery-btn" onclick="setDeliveryType('pickup')">Самовывоз 🏪</button>
+        </div>
+
+        <div id="address-box">
+            <input type="text" id="address-input" placeholder="Введите адрес доставки (улица, дом, квартира)">
+        </div>
+
+        <div class="cart-total">
+            <span>Итого:</span>
+            <span id="total-sum">0 ₽</span>
+        </div>
+        <button class="btn-checkout" onclick="submitOrder()">Оформить заказ</button>
+    </div>
+
+    <script>
+        let tg = window.Telegram?.WebApp;
+        if (tg) {
+            tg.expand();
+        }
+
+        let cart = [];
+        let deliveryType = 'delivery';
+
+        function setDeliveryType(type) {
+            deliveryType = type;
+            let deliveryBtn = document.getElementById('btn-delivery');
+            let pickupBtn = document.getElementById('btn-pickup');
+            let addressBox = document.getElementById('address-box');
+
+            if (type === 'delivery') {
+                deliveryBtn.classList.add('active');
+                pickupBtn.classList.remove('active');
+                addressBox.style.display = 'block';
+            } else {
+                pickupBtn.classList.add('active');
+                deliveryBtn.classList.remove('active');
+                addressBox.style.display = 'none';
+            }
+        }
+
+        function addItem(name, price) {
+            cart.push({ name, price });
+            renderCart();
+            if (tg && tg.HapticFeedback) {
+                tg.HapticFeedback.impactOccurred('medium');
+            }
+        }
+
+        function renderCart() {
+            let container = document.getElementById('cart-container');
+            let totalEl = document.getElementById('total-sum');
+
+            if (cart.length === 0) {
+                container.innerHTML = 'Корзина пуста';
+                totalEl.innerText = '0 ₽';
+                return;
+            }
+
+            container.innerHTML = cart.map(i => `
+                <div class="cart-row">
+                    <span>${i.name}</span>
+                    <b>${i.price} ₽</b>
+                </div>
+            `).join('');
+
+            let total = cart.reduce((sum, i) => sum + i.price, 0);
+            totalEl.innerText = total + ' ₽';
+        }
+
+        function submitOrder() {
+            if (cart.length === 0) {
+                alert('Корзина пуста');
+                return;
+            }
+
+            let methodText = deliveryType === 'delivery' ? '🚚 Доставка' : '🏪 Самовывоз (пр-т Карла Маркса, 5)';
+            let addressText = '';
+
+            if (deliveryType === 'delivery') {
+                let address = document.getElementById('address-input').value.trim();
+                if (!address) {
+                    alert('Пожалуйста, укажите адрес доставки!');
+                    document.getElementById('address-input').focus();
+                    return;
+                }
+                addressText = `📍 Адрес: ${address}\n`;
+            }
+
+            let text = "📦 Новый заказ из приложения SAKURA:\n\n" + 
+                       cart.map(i => `• ${i.name} — ${i.price} ₽`).join('\n') + 
+                       `\n\n📌 Способ: ${methodText}\n` +
+                       addressText +
+                       `\n💰 Итого к оплате: ${cart.reduce((sum, i) => sum + i.price, 0)} ₽`;
+
+            let url = `https://t.me/if_im_young?text=${encodeURIComponent(text)}`;
+
+            if (tg && tg.openTelegramLink) {
+                tg.openTelegramLink(url);
+            } else {
+                window.open(url, '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
