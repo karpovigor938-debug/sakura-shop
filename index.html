@@ -129,18 +129,14 @@
                 return;
             }
             
-            let text = "Здравствуйте! Хочу оформить заказ в салоне SAKURA:\n" + cart.map(i => `• ${i.name} — ${i.price} ₽`).join('\n');
-            let total = cart.reduce((sum, i) => sum + i.price, 0);
-            text += `\n\nИтого к оплате: ${total} ₽`;
+            let orderData = {
+                items: cart,
+                total: cart.reduce((sum, i) => sum + i.price, 0)
+            };
 
-            // Безопасное открытие ссылки через SDK Telegram для мобильных и ПК
-            let url = `https://t.me/karpovigor938?text=${encodeURIComponent(text)}`;
-            if (tg.openTelegramLink) {
-                tg.openTelegramLink(url);
+            // Передаем данные боту @SakuraKambot без перехода в личные сообщения
+            if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.sendData) {
+                window.Telegram.WebApp.sendData(JSON.stringify(orderData));
             } else {
-                window.open(url, '_blank');
+                alert('Заказ успешно сформирован!');
             }
-        }
-    </script>
-</body>
-</html>
