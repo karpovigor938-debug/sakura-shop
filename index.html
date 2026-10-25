@@ -19,7 +19,7 @@
             </div>
         </header>
 
-        <!-- Каталог товаров (Ассортимент с сайта) -->
+        <!-- Каталог товаров -->
         <div id="catalog" class="space-y-4">
             <h2 class="font-serif text-lg text-stone-800 mb-2">Популярные букеты</h2>
             <div class="grid grid-cols-2 gap-3">
@@ -164,26 +164,4 @@
                 return;
             }
 
-            let summary = cart.map(i => `• ${i.name} (${i.price} ₽)`).join('\n');
-            let total = cart.reduce((sum, i) => sum + i.price, 0);
-
-            let orderData = {
-                items: cart,
-                total: total
-            };
-
-            if (tg && tg.sendData) {
-                tg.sendData(JSON.stringify(orderData));
-            }
-
-            if (tg && tg.showAlert) {
-                tg.showAlert(`Ваш заказ успешно оформлен!\n\n${summary}\n\nИтого к оплате: ${total} ₽`, function() {
-                    if (tg.close) tg.close();
-                });
-            } else {
-                alert(`Заказ оформлен!\n\n${summary}\n\nИтого: ${total} ₽`);
-            }
-        }
-    </script>
-</body>
-</html>
+            let text = "📦 Новый заказ из приложения
