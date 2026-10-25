@@ -79,14 +79,19 @@
             totalEl.innerText = total + ' ₽';
         }
 
-        function checkout() {
+                        function checkout() {
             if (cart.length === 0) {
                 alert('Корзина пуста');
                 return;
             }
-            let orderSummary = cart.map(i => i.name).join(', ');
-            tg.sendData(JSON.stringify({order: orderSummary, cart: cart}));
-            tg.close();
+            let text = "Здравствуйте! Заказ из SAKURA:\n" + cart.map(i => `• ${i.name} — ${i.price} ₽`).join('\n');
+            let total = cart.reduce((sum, i) => sum + i.price, 0);
+            text += `\nИтого: ${total} ₽`;
+            window.open(`https://t.me/karpovigor938?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        }
+
         }
     </script>
 </body>
