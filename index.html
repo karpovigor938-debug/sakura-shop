@@ -3,122 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAKURA — Доставка цветов в Петропавловске-Камчатском</title>
-    <!-- Официальный скрипт Telegram WebApp -->
+    <title>SAKURA — Доставка цветов</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: #fafaf9; color: #1c1917; padding: 12px; padding-bottom: 80px; }
+        header { text-align: center; margin: 15px 0 20px; }
+        h1 { font-size: 22px; color: #881337; font-weight: 700; letter-spacing: 1px; }
+        p.sub { font-size: 11px; color: #78716c; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+        .badge { display: inline-block; background: #fff1f2; color: #9f1239; font-size: 11px; padding: 4px 10px; border-radius: 20px; margin-top: 8px; font-weight: 500; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .card { background: #ffffff; border: 1px solid #f5f5f4; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; }
+        .emoji-box { width: 100%; height: 110px; background: #fff1f2; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 8px; }
+        .card h3 { font-size: 12px; color: #1c1917; font-weight: 600; line-height: 1.3; }
+        .card p { font-size: 10px; color: #78716c; margin-top: 2px; }
+        .card-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+        .price { font-size: 12px; font-weight: 700; color: #881337; }
+        .btn-add { background: #9f1239; color: #ffffff; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 500; cursor: pointer; }
+        .btn-add:active { transform: scale(0.95); }
+        .cart-box { margin-top: 20px; background: #ffffff; border: 1px solid #f5f5f4; border-radius: 16px; padding: 14px; }
+        .cart-title { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+        .cart-items { font-size: 11px; color: #44403c; margin-bottom: 12px; min-height: 20px; }
+        .cart-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #fafaf9; }
+        .cart-total { border-top: 1px solid #f5f5f4; padding-top: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 13px; font-weight: 700; }
+        .cart-total span:last-child { color: #881337; font-size: 15px; }
+        .btn-checkout { width: 100%; background: #1c1917; color: #ffffff; border: none; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
+        .btn-checkout:active { transform: scale(0.98); }
+    </style>
 </head>
-<body class="bg-stone-50 text-stone-800 font-sans pb-16">
-    <div class="max-w-md mx-auto p-4">
-        <!-- Шапка салона -->
-        <header class="text-center my-6">
-            <h1 class="text-2xl font-serif tracking-wider text-rose-900 font-bold">SAKURA</h1>
-            <p class="text-xs text-stone-500 uppercase tracking-widest mt-1">Цветочный салон • Петропавловск-Камчатский</p>
-            <div class="mt-3 inline-block bg-rose-50 text-rose-800 text-[11px] px-3 py-1 rounded-full font-medium">
-                🚚 Доставка за 60 минут / Самовывоз: пр-т Карла Маркса, 5
+<body>
+
+    <header>
+        <h1>SAKURA</h1>
+        <p class="sub">Цветочный салон • Петропавловск-Камчатский</p>
+        <div class="badge">🚚 Доставка за 60 минут</div>
+    </header>
+
+    <div class="grid">
+        <!-- 1 -->
+        <div class="card">
+            <div>
+                <div class="emoji-box">🌸</div>
+                <h3>Букет «Шёпот страсти»</h3>
+                <p>С розой сорт Нина</p>
             </div>
-        </header>
-
-        <!-- Каталог товаров -->
-        <div id="catalog" class="space-y-4">
-            <h2 class="font-serif text-lg text-stone-800 mb-2">Популярные букеты</h2>
-            <div class="grid grid-cols-2 gap-3">
-                
-                <!-- Товар 1 -->
-                <div class="bg-white p-3 rounded-2xl shadow-sm border border-stone-100 flex flex-col justify-between">
-                    <div>
-                        <div class="w-full h-32 bg-rose-50 rounded-xl mb-2 flex items-center justify-center text-3xl">🌸</div>
-                        <h3 class="font-medium text-xs text-stone-800 leading-snug">Букет «Шёпот страсти»</h3>
-                        <p class="text-[10px] text-stone-500 mt-1">С розой сорт Нина</p>
-                    </div>
-                    <div class="mt-3 flex items-center justify-between">
-                        <span class="font-semibold text-rose-900 text-xs">5 010 ₽</span>
-                        <button onclick="addToCart('Букет «Шёпот страсти»', 5010)" class="bg-rose-800 text-white text-[11px] px-2.5 py-1.5 rounded-lg active:scale-95 transition">В корзину</button>
-                    </div>
-                </div>
-
-                <!-- Товар 2 -->
-                <div class="bg-white p-3 rounded-2xl shadow-sm border border-stone-100 flex flex-col justify-between">
-                    <div>
-                        <div class="w-full h-32 bg-pink-50 rounded-xl mb-2 flex items-center justify-center text-3xl">💐</div>
-                        <h3 class="font-medium text-xs text-stone-800 leading-snug">Букет «Легкая песня»</h3>
-                        <p class="text-[10px] text-stone-500 mt-1">Гвоздики, хризантема, роза</p>
-                    </div>
-                    <div class="mt-3 flex items-center justify-between">
-                        <span class="font-semibold text-rose-900 text-xs">7 180 ₽</span>
-                        <button onclick="addToCart('Букет «Легкая песня»', 7180)" class="bg-rose-800 text-white text-[11px] px-2.5 py-1.5 rounded-lg active:scale-95 transition">В корзину</button>
-                    </div>
-                </div>
-
-                <!-- Товар 3 -->
-                <div class="bg-white p-3 rounded-2xl shadow-sm border border-stone-100 flex flex-col justify-between">
-                    <div>
-                        <div class="w-full h-32 bg-purple-50 rounded-xl mb-2 flex items-center justify-center text-3xl">🪻</div>
-                        <h3 class="font-medium text-xs text-stone-800 leading-snug">Букет «Розовый шарм»</h3>
-                        <p class="text-[10px] text-stone-500 mt-1">Гортензия и кустовая роза</p>
-                    </div>
-                    <div class="mt-3 flex items-center justify-between">
-                        <span class="font-semibold text-rose-900 text-xs">3 400 ₽</span>
-                        <button onclick="addToCart('Букет «Розовый шарм»', 3400)" class="bg-rose-800 text-white text-[11px] px-2.5 py-1.5 rounded-lg active:scale-95 transition">В корзину</button>
-                    </div>
-                </div>
-
-                <!-- Товар 4 -->
-                <div class="bg-white p-3 rounded-2xl shadow-sm border border-stone-100 flex flex-col justify-between">
-                    <div>
-                        <div class="w-full h-32 bg-blue-50 rounded-xl mb-2 flex items-center justify-center text-3xl">💙</div>
-                        <h3 class="font-medium text-xs text-stone-800 leading-snug">Букет «Облачный блюз»</h3>
-                        <p class="text-[10px] text-stone-500 mt-1">Голубая гортензия, хризантема</p>
-                    </div>
-                    <div class="mt-3 flex items-center justify-between">
-                        <span class="font-semibold text-rose-900 text-xs">3 700 ₽</span>
-                        <button onclick="addToCart('Букет «Облачный блюз»', 3700)" class="bg-rose-800 text-white text-[11px] px-2.5 py-1.5 rounded-lg active:scale-95 transition">В корзину</button>
-                    </div>
-                </div>
-
-                <!-- Товар 5 -->
-                <div class="bg-white p-3 rounded-2xl shadow-sm border border-stone-100 flex flex-col justify-between">
-                    <div>
-                        <div class="w-full h-32 bg-red-50 rounded-xl mb-2 flex items-center justify-center text-3xl">🌹</div>
-                        <h3 class="font-medium text-xs text-stone-800 leading-snug">15 красных роз (50 см)</h3>
-                        <p class="text-[10px] text-stone-500 mt-1">Элитные свежие розы</p>
-                    </div>
-                    <div class="mt-3 flex items-center justify-between">
-                        <span class="font-semibold text-rose-900 text-xs">5 700 ₽</span>
-                        <button onclick="addToCart('15 красных роз 50 см', 5700)" class="bg-rose-800 text-white text-[11px] px-2.5 py-1.5 rounded-lg active:scale-95 transition">В корзину</button>
-                    </div>
-                </div>
-
-                <!-- Товар 6 -->
-                <div class="bg-white p-3 rounded-2xl shadow-sm border border-stone-100 flex flex-col justify-between">
-                    <div>
-                        <div class="w-full h-32 bg-amber-50 rounded-xl mb-2 flex items-center justify-center text-3xl">✨</div>
-                        <h3 class="font-medium text-xs text-stone-800 leading-snug">Букет «Ароматы лета»</h3>
-                        <p class="text-[10px] text-stone-500 mt-1">Яркая авторская сборка</p>
-                    </div>
-                    <div class="mt-3 flex items-center justify-between">
-                        <span class="font-semibold text-rose-900 text-xs">3 800 ₽</span>
-                        <button onclick="addToCart('Букет «Ароматы лета»', 3800)" class="bg-rose-800 text-white text-[11px] px-2.5 py-1.5 rounded-lg active:scale-95 transition">В корзину</button>
-                    </div>
-                </div>
-
+            <div class="card-bottom">
+                <span class="price">5 010 ₽</span>
+                <button class="btn-add" onclick="addItem('Букет «Шёпот страсти»', 5010)">В корзину</button>
             </div>
         </div>
 
-        <!-- Блок корзины и заказа -->
-        <div class="mt-6 bg-white p-4 rounded-2xl shadow-sm border border-stone-100">
-            <h2 class="font-medium text-stone-800 mb-3 text-sm">Ваш заказ</h2>
-            <div id="cart-items" class="text-xs text-stone-600 space-y-1 mb-4">
-                Корзина пуста
+        <!-- 2 -->
+        <div class="card">
+            <div>
+                <div class="emoji-box">💐</div>
+                <h3>Букет «Легкая песня»</h3>
+                <p>Гвоздики, хризантема, роза</p>
             </div>
-            <div class="border-t border-stone-100 pt-3 flex justify-between items-center mb-4">
-                <span class="font-medium text-sm text-stone-700">Итого:</span>
-                <span id="total-price" class="font-bold text-rose-900 text-base">0 ₽</span>
+            <div class="card-bottom">
+                <span class="price">7 180 ₽</span>
+                <button class="btn-add" onclick="addItem('Букет «Легкая песня»', 7180)">В корзину</button>
             </div>
-            <button onclick="checkout()" class="w-full bg-stone-900 text-white text-sm py-3 rounded-xl font-medium active:scale-95 transition shadow">
-                Оформить заказ
-            </button>
         </div>
+
+        <!-- 3 -->
+        <div class="card">
+            <div>
+                <div class="emoji-box">🪻</div>
+                <h3>Букет «Розовый шарм»</h3>
+                <p>Гортензия и кустовая роза</p>
+            </div>
+            <div class="card-bottom">
+                <span class="price">3 400 ₽</span>
+                <button class="btn-add" onclick="addItem('Букет «Розовый шарм»', 3400)">В корзину</button>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="card">
+            <div>
+                <div class="emoji-box">💙</div>
+                <h3>Букет «Облачный блюз»</h3>
+                <p>Голубая гортензия, хризантема</p>
+            </div>
+            <div class="card-bottom">
+                <span class="price">3 700 ₽</span>
+                <button class="btn-add" onclick="addItem('Букет «Облачный блюз»', 3700)">В корзину</button>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="card">
+            <div>
+                <div class="emoji-box">🌹</div>
+                <h3>15 красных роз (50 см)</h3>
+                <p>Элитные свежие розы</p>
+            </div>
+            <div class="card-bottom">
+                <span class="price">5 700 ₽</span>
+                <button class="btn-add" onclick="addItem('15 красных роз 50 см', 5700)">В корзину</button>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="card">
+            <div>
+                <div class="emoji-box">✨</div>
+                <h3>Букет «Ароматы лета»</h3>
+                <p>Яркая авторская сборка</p>
+            </div>
+            <div class="card-bottom">
+                <span class="price">3 800 ₽</span>
+                <button class="btn-add" onclick="addItem('Букет «Ароматы лета»', 3800)">В корзину</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-box">
+        <div class="cart-title">Ваш заказ</div>
+        <div id="cart-container" class="cart-items">Корзина пуста</div>
+        <div class="cart-total">
+            <span>Итого:</span>
+            <span id="total-sum">0 ₽</span>
+        </div>
+        <button class="btn-checkout" onclick="submitOrder()">Оформить заказ</button>
     </div>
 
     <script>
@@ -129,39 +137,54 @@
 
         let cart = [];
 
-        function addToCart(name, price) {
+        function addItem(name, price) {
             cart.push({ name, price });
-            updateCart();
+            renderCart();
             if (tg && tg.HapticFeedback) {
                 tg.HapticFeedback.impactOccurred('medium');
             }
         }
 
-        function updateCart() {
-            let container = document.getElementById('cart-items');
-            let totalEl = document.getElementById('total-price');
-            
+        function renderCart() {
+            let container = document.getElementById('cart-container');
+            let totalEl = document.getElementById('total-sum');
+
             if (cart.length === 0) {
                 container.innerHTML = 'Корзина пуста';
                 totalEl.innerText = '0 ₽';
                 return;
             }
-            
-            container.innerHTML = cart.map(item => `
-                <div class="flex justify-between py-1 border-b border-stone-50">
-                    <span>${item.name}</span>
-                    <span class="font-medium">${item.price} ₽</span>
+
+            container.innerHTML = cart.map(i => `
+                <div class="cart-row">
+                    <span>${i.name}</span>
+                    <b>${i.price} ₽</b>
                 </div>
             `).join('');
 
-            let total = cart.reduce((sum, item) => sum + item.price, 0);
+            let total = cart.reduce((sum, i) => sum + i.price, 0);
             totalEl.innerText = total + ' ₽';
         }
 
-        function checkout() {
+        function submitOrder() {
             if (cart.length === 0) {
                 alert('Корзина пуста');
                 return;
             }
 
-            let text = "📦 Новый заказ из приложения
+            let text = "📦 Новый заказ из приложения SAKURA:\n" + 
+                       cart.map(i => `• ${i.name} — ${i.price} ₽`).join('\n') + 
+                       `\n\n💰 Итого: ${cart.reduce((sum, i) => sum + i.price, 0) } ₽`;
+
+            // Заказ уходит в ваш аккаунт @if_im_young с готовым текстом
+            let url = `https://t.me/if_im_young?text=${encodeURIComponent(text)}`;
+
+            if (tg && tg.openTelegramLink) {
+                tg.openTelegramLink(url);
+            } else {
+                window.open(url, '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
