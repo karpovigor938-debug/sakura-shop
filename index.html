@@ -7,185 +7,192 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: #f7f6f5; color: #292524; padding: 12px; padding-bottom: 110px; }
+        body { background-color: #ffffff; color: #292524; padding-bottom: 100px; }
         
-        header { text-align: center; margin: 12px 0 16px; background: #ffffff; padding: 16px; border-radius: 16px; border: 1px solid #ebe9e6; }
-        h1 { font-size: 24px; color: #78112d; font-weight: 700; letter-spacing: 1.5px; font-family: serif; }
-        p.sub { font-size: 11px; color: #78716c; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-        .badge { display: inline-block; background: #fdf2f2; color: #9f1239; font-size: 11px; padding: 5px 12px; border-radius: 20px; margin-top: 10px; font-weight: 500; }
-        
-        .section-title { font-size: 15px; font-weight: 700; color: #292524; margin: 20px 0 10px; font-family: serif; display: flex; align-items: center; gap: 6px; }
-        .section-title::before { content: ""; display: inline-block; width: 3px; height: 14px; background: #78112d; border-radius: 2px; }
+        /* Шапка сайта как на скриншотах */
+        header { text-align: center; padding: 15px 16px 10px; background: #ffffff; border-bottom: 1px solid #f0efed; position: sticky; top: 0; z-index: 50; }
+        .logo-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .menu-icon { font-size: 20px; cursor: pointer; color: #292524; }
+        .logo-text { font-family: serif; font-size: 22px; font-weight: 700; color: #b8975a; letter-spacing: 2px; }
+        .phone-icon { font-size: 18px; color: #292524; }
 
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .card { background: #ffffff; border: 1px solid #ebe9e6; border-radius: 16px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 6px rgba(0,0,0,0.02); cursor: pointer; transition: transform 0.1s ease; }
-        .card:active { transform: scale(0.98); }
-        
-        .img-box { width: 100%; height: 120px; border-radius: 12px; overflow: hidden; margin-bottom: 8px; background: #fdf2f2; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+        /* Баннер доставки */
+        .promo-banner { background: #e8b4bc; color: #ffffff; padding: 20px; border-radius: 12px; margin: 12px; text-align: center; background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://flowerskam.ru/image/cache/catalog/Screenshot_14-500x500.png'); background-size: cover; background-position: center; }
+        .promo-banner h2 { font-size: 20px; font-family: serif; margin-bottom: 6px; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .promo-banner p { font-size: 12px; margin-bottom: 12px; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+        .promo-btn { background: #e8b4bc; color: #ffffff; border: none; padding: 8px 16px; border-radius: 6px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
 
-        .card h3 { font-size: 12px; color: #292524; font-weight: 600; line-height: 1.3; }
-        .card p { font-size: 10px; color: #78716c; margin-top: 3px; }
-        .card-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
-        .price { font-size: 12px; font-weight: 700; color: #78112d; }
-        
-        .btn-add { background: #78112d; color: #ffffff; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; }
-        .btn-add:active { transform: scale(0.95); background: #9f1239; }
+        .section-title { font-size: 20px; font-weight: 400; color: #1c1917; margin: 24px 12px 12px; font-family: serif; }
 
-        /* Модальное окно подробного описания */
+        /* Сетка товаров */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 12px; }
+        .card { background: #ffffff; border: 1px solid #f0efed; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
+        
+        .img-box { width: 100%; height: 160px; background: #f7f6f5; position: relative; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .badge-novinka { position: absolute; top: 8px; left: 8px; background: #ffffff; color: #0284c7; font-size: 9px; font-weight: 700; padding: 3px 6px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        
+        .card-body { padding: 10px; }
+        .card h3 { font-size: 12px; color: #1c1917; font-weight: 400; line-height: 1.3; font-family: serif; }
+        .card-bottom { padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+        .price { font-size: 14px; font-weight: 700; color: #1c1917; }
+        
+        /* Фирменная розовая кнопка сайта */
+        .btn-add { background: #e8b4bc; color: #ffffff; border: none; padding: 9px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; cursor: pointer; letter-spacing: 0.5px; text-align: center; }
+        .btn-add:active { transform: scale(0.98); background: #dca3ac; }
+
+        /* Модальное окно */
         #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; align-items: flex-end; }
-        .modal-content { background: #ffffff; width: 100%; border-radius: 24px 24px 0 0; padding: 20px; max-height: 80vh; overflow-y: auto; animation: slideUp 0.3s ease; }
+        .modal-content { background: #ffffff; width: 100%; border-radius: 20px 20px 0 0; padding: 20px; max-height: 85vh; overflow-y: auto; animation: slideUp 0.3s ease; }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        .modal-img { width: 100%; height: 200px; background: #fdf2f2; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 60px; margin-bottom: 14px; }
-        .modal-title { font-size: 18px; font-weight: 700; color: #78112d; font-family: serif; margin-bottom: 6px; }
-        .modal-price { font-size: 16px; font-weight: 700; color: #292524; margin-bottom: 12px; }
-        .modal-desc { font-size: 12px; color: #57534e; line-height: 1.5; margin-bottom: 20px; }
-        .close-modal { width: 100%; background: #f7f6f5; color: #292524; border: none; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+        .modal-img { width: 100%; height: 240px; border-radius: 12px; overflow: hidden; margin-bottom: 12px; }
+        .modal-img img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-title { font-size: 18px; font-weight: 400; color: #1c1917; font-family: serif; margin-bottom: 6px; }
+        .modal-price { font-size: 16px; font-weight: 700; color: #1c1917; margin-bottom: 10px; }
+        .modal-desc { font-size: 12px; color: #78716c; line-height: 1.5; margin-bottom: 20px; }
+        .close-modal { width: 100%; background: #f5f5f4; color: #1c1917; border: none; padding: 11px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; margin-top: 8px; }
 
-        .cart-box { margin-top: 24px; background: #ffffff; border: 1px solid #ebe9e6; border-radius: 16px; padding: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-        .cart-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; font-family: serif; color: #78112d; }
-        .cart-items { font-size: 11px; color: #44403c; margin-bottom: 12px; min-height: 20px; }
-        .cart-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #f7f6f5; }
+        /* Блок корзины */
+        .cart-box { margin: 20px 12px 0; background: #ffffff; border: 1px solid #e7e5e4; border-radius: 12px; padding: 16px; }
+        .cart-title { font-size: 15px; font-weight: 700; margin-bottom: 10px; font-family: serif; }
+        .cart-items { font-size: 12px; color: #44403c; margin-bottom: 12px; }
+        .cart-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f5f5f4; }
         
-        .delivery-options { margin: 10px 0; display: flex; gap: 8px; }
-        .delivery-btn { flex: 1; padding: 8px; font-size: 11px; font-weight: 600; border: 1px solid #e7e5e4; border-radius: 8px; background: #f7f6f5; color: #78716c; cursor: pointer; text-align: center; }
-        .delivery-btn.active { background: #fdf2f2; border-color: #78112d; color: #78112d; }
+        .delivery-options { margin: 12px 0; display: flex; gap: 8px; }
+        .delivery-btn { flex: 1; padding: 9px; font-size: 11px; font-weight: 600; border: 1px solid #e7e5e4; border-radius: 8px; background: #f5f5f4; color: #78716c; cursor: pointer; text-align: center; }
+        .delivery-btn.active { background: #e8b4bc; border-color: #e8b4bc; color: #ffffff; }
         
-        #address-box { display: block; margin-bottom: 10px; }
-        #address-input { width: 100%; padding: 10px; font-size: 12px; border: 1px solid #d6d3d1; border-radius: 8px; outline: none; background: #f7f6f5; }
-        #address-input:focus { border-color: #78112d; background: #ffffff; }
+        #address-box { display: block; margin-bottom: 12px; }
+        #address-input { width: 100%; padding: 10px; font-size: 12px; border: 1px solid #d6d3d1; border-radius: 8px; outline: none; background: #fcfbf9; }
+        #address-input:focus { border-color: #e8b4bc; }
 
-        .cart-total { border-top: 1px solid #ebe9e6; padding-top: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 13px; font-weight: 700; }
-        .cart-total span:last-child { color: #78112d; font-size: 16px; }
+        .cart-total { border-top: 1px solid #e7e5e4; padding-top: 10px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 14px; font-weight: 700; }
         
-        .btn-checkout { width: 100%; background: #292524; color: #ffffff; border: none; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .btn-checkout:active { transform: scale(0.98); background: #44403c; }
+        .btn-checkout { width: 100%; background: #1c1917; color: #ffffff; border: none; padding: 13px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; }
+        .btn-checkout:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>SAKURA</h1>
-        <p class="sub">Цветочный салон • Петропавловск-Камчатский</p>
-        <div class="badge">🚚 Доставка за 60 минут / Самовывоз: пр-т Карла Маркса, 5</div>
+        <div class="logo-container">
+            <div class="menu-icon">☰</div>
+            <div class="logo-text">SAKURA</div>
+            <div class="phone-icon">📞</div>
+        </div>
     </header>
 
-    <!-- Сборные букеты -->
-    <div class="section-title">Сборные букеты и миксы</div>
+    <div class="promo-banner">
+        <h2>Доставим за 60 минут</h2>
+        <p>бережно и аккуратно</p>
+        <button class="promo-btn">Заказать</button>
+    </div>
+
+    <!-- Популярные букеты -->
+    <div class="section-title">Популярные букеты и композиции</div>
     <div class="grid">
-        <div class="card" onclick="openModal('Букет «Шёпот страсти»', 5010, 'Изысканный премиальный букет с отборной розой сорт Нина, свежей зеленью и стильной дизайнерской упаковкой.', '🌸')">
-            <div>
-                <div class="img-box">🌸</div>
-                <h3>Букет «Шёпот страсти»</h3>
-                <p>С розой сорт Нина</p>
+        <div class="card" onclick="openModal('Букет «Шёпот страсти»', 5010, 'Изысканный премиальный букет с отборной розой сорт Нина, свежей зеленью и стильной дизайнерской упаковкой.', 'https://flowerskam.ru/image/cache/catalog/Screenshot_25-500x500.png')">
+            <div class="img-box">
+                <span class="badge-novinka">⚡ Новинка</span>
+                <img src="https://flowerskam.ru/image/cache/catalog/Screenshot_25-500x500.png" alt="Шёпот страсти">
+            </div>
+            <div class="card-body">
+                <h3>Букет «Шёпот страсти» с розой сорт Нина</h3>
             </div>
             <div class="card-bottom">
                 <span class="price">5 010 ₽</span>
-                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет «Шёпот страсти»', 5010)">В корзину</button>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет «Шёпот страсти»', 5010)">В корзину +</button>
             </div>
         </div>
 
-        <div class="card" onclick="openModal('Букет «Легкая песня»', 7180, 'Яркий и воздушный микс, включающий ароматные гвоздики, хризантемы и нежные кустовые розы.', '💐')">
-            <div>
-                <div class="img-box">💐</div>
-                <h3>Букет «Легкая песня»</h3>
-                <p>Гвоздики, хризантема, роза</p>
+        <div class="card" onclick="openModal('Букет «Розовый шарм»', 3400, 'Объёмный и нежный букет из свежей гортензии и кустовой розы.', 'https://flowerskam.ru/image/cache/catalog/Screenshot_1-500x500.png')">
+            <div class="img-box">
+                <span class="badge-novinka">⚡ Новинка</span>
+                <img src="https://flowerskam.ru/image/cache/catalog/Screenshot_1-500x500.png" alt="Розовый шарм">
             </div>
-            <div class="card-bottom">
-                <span class="price">7 180 ₽</span>
-                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет «Легкая песня»', 7180)">В корзину</button>
-            </div>
-        </div>
-
-        <div class="card" onclick="openModal('Букет «Розовый шарм»', 3400, 'Объёмный и нежный букет из свежей голубой гортензии и пышной кустовой розы.', '🪻')">
-            <div>
-                <div class="img-box">🪻</div>
-                <h3>Букет «Розовый шарм»</h3>
-                <p>Гортензия и кустовая роза</p>
+            <div class="card-body">
+                <h3>Букет «Розовый шарм» из гортензии и кустовой розы</h3>
             </div>
             <div class="card-bottom">
                 <span class="price">3 400 ₽</span>
-                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет «Розовый шарм»', 3400)">В корзину</button>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет «Розовый шарм»', 3400)">В корзину +</button>
             </div>
         </div>
 
-        <div class="card" onclick="openModal('Букет «Облачный блюз»', 3700, 'Утонченная композиция из небесно-голубой гортензии и белоснежной пушистой хризантемы.', '💙')">
-            <div>
-                <div class="img-box">💙</div>
-                <h3>Букет «Облачный блюз»</h3>
-                <p>Голубая гортензия, хризантема</p>
+        <div class="card" onclick="openModal('Букет «Облачный блюз»', 3700, 'Утонченная композиция из небесно-голубой гортензии и белоснежной хризантемы.', 'https://flowerskam.ru/image/cache/catalog/Screenshot_2-500x500.png')">
+            <div class="img-box">
+                <span class="badge-novinka">⚡ Новинка</span>
+                <img src="https://flowerskam.ru/image/cache/catalog/Screenshot_2-500x500.png" alt="Облачный блюз">
+            </div>
+            <div class="card-body">
+                <h3>Букет «Облачный блюз» из голубой гортензии</h3>
             </div>
             <div class="card-bottom">
                 <span class="price">3 700 ₽</span>
-                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет «Облачный блюз»', 3700)">В корзину</button>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет «Облачный блюз»', 3700)">В корзину +</button>
+            </div>
+        </div>
+
+        <div class="card" onclick="openModal('Композиция «Цветочный сейф»', 3415, 'Элегантная композиция с розой и лизиантусом в уникальной коробке.', 'https://flowerskam.ru/image/cache/catalog/Screenshot_18-500x500.png')">
+            <div class="img-box">
+                <span class="badge-novinka">⚡ Новинка</span>
+                <img src="https://flowerskam.ru/image/cache/catalog/Screenshot_18-500x500.png" alt="Цветочный сейф">
+            </div>
+            <div class="card-body">
+                <h3>Композиция «Цветочный сейф» с розой</h3>
+            </div>
+            <div class="card-bottom">
+                <span class="price">3 415 ₽</span>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('Композиция «Цветочный сейф»', 3415)">В корзину +</button>
             </div>
         </div>
     </div>
 
-    <!-- Розы и монобукеты -->
-    <div class="section-title">Розы и монобукеты</div>
+    <!-- Розы -->
+    <div class="section-title">Розы</div>
     <div class="grid">
-        <div class="card" onclick="openModal('15 красных роз (50 см)', 5700, 'Классический премиальный букет из 15 длинных отборных красных роз сорта Эксплорер под ленту.', '🌹')">
-            <div>
-                <div class="img-box">🌹</div>
-                <h3>15 красных роз (50 см)</h3>
-                <p>Элитные свежие розы Эксплорер</p>
+        <div class="card" onclick="openModal('15 красных роз (50 см)', 5700, 'Классический премиальный букет из 15 длинных отборных красных роз сорта Эксплорер.', 'https://flowerskam.ru/image/cache/catalog/Screenshot_14-500x500.png')">
+            <div class="img-box">
+                <img src="https://flowerskam.ru/image/cache/catalog/Screenshot_14-500x500.png" alt="15 роз">
+            </div>
+            <div class="card-body">
+                <h3>15 красных роз 50 см под ленту</h3>
             </div>
             <div class="card-bottom">
                 <span class="price">5 700 ₽</span>
-                <button class="btn-add" onclick="event.stopPropagation(); addItem('15 красных роз 50 см', 5700)">В корзину</button>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('15 красных роз 50 см', 5700)">В корзину +</button>
             </div>
         </div>
 
-        <div class="card" onclick="openModal('Букет «Ароматы лета»', 3800, 'Солнечная и жизнерадостная авторская сборка из сезонных цветов премиального качества.', '✨')">
-            <div>
-                <div class="img-box">✨</div>
-                <h3>Букет «Ароматы лета»</h3>
-                <p>Яркая авторская сборка</p>
+        <div class="card" onclick="openModal('Букет из 15 пионовидных роз', 9600, 'Роскошный объемный букет из 15 пионовидных роз с добавлением ароматного эвкалипта.', 'https://flowerskam.ru/image/cache/catalog/Screenshot_9-500x500.png')">
+            <div class="img-box">
+                <img src="https://flowerskam.ru/image/cache/catalog/Screenshot_9-500x500.png" alt="Пионовидные розы">
             </div>
-            <div class="card-bottom">
-                <span class="price">3 800 ₽</span>
-                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет «Ароматы лета»', 3800)">В корзину</button>
-            </div>
-        </div>
-
-        <div class="card" onclick="openModal('Букет из 15 пионовидных роз', 9600, 'Роскошный объемный букет из 15 пионовидных роз с добавлением ароматного эвкалипта.', '🌷')">
-            <div>
-                <div class="img-box">🌷</div>
-                <h3>Букет из 15 пионовидных роз</h3>
-                <p>С эвкалиптом в упаковке</p>
+            <div class="card-body">
+                <h3>Букет из 15 шт пионовидных кустовых роз</h3>
             </div>
             <div class="card-bottom">
                 <span class="price">9 600 ₽</span>
-                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет из 15 пионовидных роз', 9600)">В корзину</button>
-            </div>
-        </div>
-
-        <div class="card" onclick="openModal('25 белых роз (Мондиаль)', 9550, 'Величественный и чистый букет из 25 белых роз сорта Мондиаль высотой 50 см.', '🤍')">
-            <div>
-                <div class="img-box">🤍</div>
-                <h3>25 белых роз (Мондиаль)</h3>
-                <p>Высота 50 см под ленту</p>
-            </div>
-            <div class="card-bottom">
-                <span class="price">9 550 ₽</span>
-                <button class="btn-add" onclick="event.stopPropagation(); addItem('25 белых роз Мондиаль', 9550)">В корзину</button>
+                <button class="btn-add" onclick="event.stopPropagation(); addItem('Букет из 15 пионовидных роз', 9600)">В корзину +</button>
             </div>
         </div>
     </div>
 
-    <!-- Модальное окно подробностей -->
+    <!-- Модальное окно -->
     <div id="modal" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <div id="modal-img" class="modal-img">🌸</div>
-            <div id="modal-title" class="modal-title">Название букета</div>
+            <div class="modal-img">
+                <img id="modal-img-tag" src="" alt="Букет">
+            </div>
+            <div id="modal-title" class="modal-title">Название</div>
             <div id="modal-price" class="modal-price">0 ₽</div>
-            <div id="modal-desc" class="modal-desc">Описание букета...</div>
+            <div id="modal-desc" class="modal-desc">Описание...</div>
             <button class="btn-checkout" id="modal-add-btn" onclick="">Добавить в корзину</button>
             <button class="close-modal" onclick="closeModal()">Закрыть</button>
         </div>
     </div>
 
-    <!-- Корзина и оформление -->
+    <!-- Корзина -->
     <div class="cart-box">
         <div class="cart-title">Ваш заказ</div>
         <div id="cart-container" class="cart-items">Корзина пуста</div>
@@ -216,11 +223,11 @@
         let cart = [];
         let deliveryType = 'delivery';
 
-        function openModal(name, price, desc, emoji) {
+        function openModal(name, price, desc, imgSrc) {
             document.getElementById('modal-title').innerText = name;
             document.getElementById('modal-price').innerText = price + ' ₽';
             document.getElementById('modal-desc').innerText = desc;
-            document.getElementById('modal-img').innerText = emoji;
+            document.getElementById('modal-img-tag').src = imgSrc;
             document.getElementById('modal-add-btn').onclick = function() {
                 addItem(name, price);
                 closeModal();
