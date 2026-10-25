@@ -19,12 +19,6 @@
         .search-box span { color: #a8a29e; font-size: 14px; margin-right: 8px; }
         .search-input { border: none; outline: none; width: 100%; font-size: 13px; color: #1c1917; background: transparent; }
 
-        .banner { background: #fdf2f2; padding: 18px 16px; text-align: center; border-bottom: 1px solid #f0efed; margin: 12px 12px 15px; border-radius: 12px; }
-        .banner-logo { width: 100%; max-width: 150px; height: 45px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; }
-        .banner-logo img { height: 100%; width: auto; object-fit: contain; }
-        .banner h2 { font-size: 16px; font-family: serif; color: #78112d; margin-bottom: 3px; font-weight: 600; }
-        .banner p { font-size: 11px; color: #78716c; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-
         .section-title { font-size: 18px; font-weight: 400; color: #1c1917; margin: 16px 16px 10px; font-family: serif; }
 
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 12px; }
@@ -74,7 +68,7 @@
 </head>
 <body>
 
-    <!-- Шапка с вашей картинкой с GitHub -->
+    <!-- Шапка с вашим логотипом -->
     <header>
         <div class="logo-box">
             <img src="IMG_3772.jpeg" alt="SAKURA">
@@ -89,22 +83,13 @@
         </div>
     </div>
 
-    <!-- Баннер с вашей картинкой с GitHub -->
-    <div class="banner">
-        <div class="banner-logo">
-            <img src="IMG_3772.jpeg" alt="SAKURA">
-        </div>
-        <h2>Доставим за 60 минут</h2>
-        <p>бережно и аккуратно • Петропавловск-Камчатский</p>
-    </div>
-
     <!-- Ассортимент -->
     <div class="section-title">Весь ассортимент</div>
     <div class="grid" id="product-grid">
-        <div class="card product-item" data-title="Букет «Шёпот страсти» с розой сорт Нина" onclick="openModal('Букет «Шёпот страсти»', 5010, 'Изысканный премиальный букет с отборной розой сорт Нина, свежей зеленью и стильной дизайнерской упаковкой.', 'IMG_3772.jpeg')">
+        <div class="card product-item" data-title="Букет «Шёпот страсти» с розой сорт Нина" onclick="openModal('Букет «Шёпот страсти»', 5010, 'Изысканный премиальный букет с отборной розой сорт Нина, свежей зеленью и стильной дизайнерской упаковкой.', 'https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80')">
             <div class="img-box">
                 <span class="badge-novinka">⚡ Новинка</span>
-                <img src="IMG_3772.jpeg" alt="Шёпот страсти">
+                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80" alt="Шёпот страсти">
             </div>
             <div class="card-body">
                 <h3>Букет «Шёпот страсти» с розой сорт Нина</h3>
@@ -115,10 +100,10 @@
             </div>
         </div>
 
-        <div class="card product-item" data-title="Букет «Розовый шарм» из гортензии и кустовой розы" onclick="openModal('Букет «Розовый шарм»', 3400, 'Объёмный и нежный букет из свежей гортензии и кустовой розы.', 'IMG_3772.jpeg')">
+        <div class="card product-item" data-title="Букет «Розовый шарм» из гортензии и кустовой розы" onclick="openModal('Букет «Розовый шарм»', 3400, 'Объёмный и нежный букет из свежей гортензии и кустовой розы.', 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80')">
             <div class="img-box">
                 <span class="badge-novinka">⚡ Новинка</span>
-                <img src="IMG_3772.jpeg" alt="Розовый шарм">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" alt="Розовый шарм">
             </div>
             <div class="card-body">
                 <h3>Букет «Розовый шарм» из гортензии и кустовой розы</h3>
@@ -129,10 +114,10 @@
             </div>
         </div>
 
-        <div class="card product-item" data-title="Букет «Облачный блюз» из голубой гортензии" onclick="openModal('Букет «Облачный блюз»', 3700, 'Утонченная композиция из небесно-голубой гортензии и белоснежной хризантемы.', 'IMG_3772.jpeg')">
+        <div class="card product-item" data-title="Букет «Облачный блюз» из голубой гортензии" onclick="openModal('Букет «Облачный блюз»', 3700, 'Утонченная композиция из небесно-голубой гортензии и белоснежной хризантемы.', 'https://images.unsplash.com/photo-1508610048659-a06b669e3375?auto=format&fit=crop&w=600&q=80')">
             <div class="img-box">
                 <span class="badge-novinka">⚡ Новинка</span>
-                <img src="IMG_3772.jpeg" alt="Облачный блюз">
+                <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3375?auto=format&fit=crop&w=600&q=80" alt="Облачный блюз">
             </div>
             <div class="card-body">
                 <h3>Букет «Облачный блюз» из голубой гортензии</h3>
@@ -143,10 +128,10 @@
             </div>
         </div>
 
-        <div class="card product-item" data-title="Композиция «Цветочный сейф» с розой" onclick="openModal('Композиция «Цветочный сейф»', 3415, 'Элегантная композиция с розой и лизиантусом в уникальной фирменной коробке.', 'IMG_3772.jpeg')">
+        <div class="card product-item" data-title="Композиция «Цветочный сейф» с розой" onclick="openModal('Композиция «Цветочный сейф»', 3415, 'Элегантная композиция с розой и лизиантусом в уникальной фирменной коробке.', 'https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80')">
             <div class="img-box">
                 <span class="badge-novinka">⚡ Новинка</span>
-                <img src="IMG_3772.jpeg" alt="Цветочный сейф">
+                <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Цветочный сейф">
             </div>
             <div class="card-body">
                 <h3>Композиция «Цветочный сейф» с розой</h3>
@@ -157,9 +142,9 @@
             </div>
         </div>
 
-        <div class="card product-item" data-title="15 красных роз 50 см под ленту" onclick="openModal('15 красных роз (50 см)', 5700, 'Классический премиальный букет из 15 длинных отборных красных роз сорта Эксплорер.', 'IMG_3772.jpeg')">
+        <div class="card product-item" data-title="15 красных роз 50 см под ленту" onclick="openModal('15 красных роз (50 см)', 5700, 'Классический премиальный букет из 15 длинных отборных красных роз сорта Эксплорер.', 'https://images.unsplash.com/photo-1559563458-527698bf5295?auto=format&fit=crop&w=600&q=80')">
             <div class="img-box">
-                <img src="IMG_3772.jpeg" alt="15 роз">
+                <img src="https://images.unsplash.com/photo-1559563458-527698bf5295?auto=format&fit=crop&w=600&q=80" alt="15 роз">
             </div>
             <div class="card-body">
                 <h3>15 красных роз 50 см под ленту</h3>
@@ -170,9 +155,9 @@
             </div>
         </div>
 
-        <div class="card product-item" data-title="Букет из 15 шт пионовидных кустовых роз" onclick="openModal('Букет из 15 пионовидных роз', 9600, 'Роскошный объемный букет из 15 пионовидных роз с добавлением ароматного эвкалипта.', 'IMG_3772.jpeg')">
+        <div class="card product-item" data-title="Букет из 15 шт пионовидных кустовых роз" onclick="openModal('Букет из 15 пионовидных роз', 9600, 'Роскошный объемный букет из 15 пионовидных роз с добавлением ароматного эвкалипта.', 'https://images.unsplash.com/photo-1533619043862-24af3c3bb3f7?auto=format&fit=crop&w=600&q=80')">
             <div class="img-box">
-                <img src="IMG_3772.jpeg" alt="Пионовидные розы">
+                <img src="https://images.unsplash.com/photo-1533619043862-24af3c3bb3f7?auto=format&fit=crop&w=600&q=80" alt="Пионовидные розы">
             </div>
             <div class="card-body">
                 <h3>Букет из 15 шт пионовидных кустовых роз</h3>
@@ -258,4 +243,92 @@
                 addItem(name, price);
                 closeModal();
             };
-            document
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function setDeliveryType(type) {
+            deliveryType = type;
+            let deliveryBtn = document.getElementById('btn-delivery');
+            let pickupBtn = document.getElementById('btn-pickup');
+            let addressBox = document.getElementById('address-box');
+
+            if (type === 'delivery') {
+                deliveryBtn.classList.add('active');
+                pickupBtn.classList.remove('active');
+                addressBox.style.display = 'block';
+            } else {
+                pickupBtn.classList.add('active');
+                deliveryBtn.classList.remove('active');
+                addressBox.style.display = 'none';
+            }
+        }
+
+        function addItem(name, price) {
+            cart.push({ name, price });
+            renderCart();
+            if (tg && tg.HapticFeedback) {
+                tg.HapticFeedback.impactOccurred('medium');
+            }
+        }
+
+        function renderCart() {
+            let container = document.getElementById('cart-container');
+            let totalEl = document.getElementById('total-sum');
+
+            if (cart.length === 0) {
+                container.innerHTML = 'Корзина пуста';
+                totalEl.innerText = '0 ₽';
+                return;
+            }
+
+            container.innerHTML = cart.map(i => `
+                <div class="cart-row">
+                    <span>${i.name}</span>
+                    <b>${i.price} ₽</b>
+                </div>
+            `).join('');
+
+            let total = cart.reduce((sum, i) => sum + i.price, 0);
+            totalEl.innerText = total + ' ₽';
+        }
+
+        function submitOrder() {
+            if (cart.length === 0) {
+                alert('Корзина пуста');
+                return;
+            }
+
+            let methodText = deliveryType === 'delivery' ? '🚚 Доставка' : '🏪 Самовывоз (пр-т Карла Маркса, 5)';
+            let addressText = '';
+
+            if (deliveryType === 'delivery') {
+                let address = document.getElementById('address-input').value.trim();
+                if (!address) {
+                    alert('Пожалуйста, укажите адрес доставки!');
+                    document.getElementById('address-input').focus();
+                    return;
+                }
+                addressText = `📍 Адрес: ${address}\n`;
+            }
+
+            let text = "📦 Новый заказ из приложения SAKURA:\n\n" + 
+                       cart.map(i => `• ${i.name} — ${i.price} ₽`).join('\n') + 
+                       `\n\n📌 Способ: ${methodText}\n` +
+                       addressText +
+                       `\n💰 Итого к оплате: ${cart.reduce((sum, i) => sum + i.price, 0)} ₽`;
+
+            let url = `https://t.me/if_im_young?text=${encodeURIComponent(text)}`;
+
+            if (tg && tg.openTelegramLink) {
+                tg.openTelegramLink(url);
+            } else {
+                window.open(url, '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
